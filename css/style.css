@@ -9,14 +9,56 @@ body {
     width: 100%;
 }
 
+/* HEADER */
+
 header {
     height: 80px;
 }
 
+/* MAIN */
+
 main {
     background-color: #7fffd4;
     height: calc(100vh - 180px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
+
+.grid-container {
+    height: 500px;
+    width: 500px;
+    border: 1px solid white;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+    align-content: flex-start;
+}
+
+.grid-item {
+    width: calc(100% / 10);
+    height: calc(100% / 10);
+    border: 1px solid white;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.grid-item span {
+    display: none;
+}
+
+.grid-item.active {
+    background-color: #6495ed;
+}
+
+.grid-item.active span {
+    display: block;
+}
+
+/* FOOTER */
 
 footer {
     height: 60px;
