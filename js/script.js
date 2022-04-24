@@ -2,32 +2,48 @@
 // Quando l'utente clicca su ogni cella, la cella cliccata si colora di azzurro.
 
 
-// 1. Genero numeri da 1 a 100
-const gridSize = 100;
-const gridArray = generateGridNumbers(gridSize);
-console.log(gridArray);
+// 1. Tramite il play button attivo lo script
 
+document.getElementById("play-btn").addEventListener("click", function() {
 
-// 2. Per ogni numero creo un grid item
-const gridContainer = document.querySelector(".grid-container");
-gridContainer.innerHTML = "";
+    // Prelevo il valore del form per la difficoltà del livello
+    const userDifficulty = document.getElementById("user-difficulty").value;
+    console.log(userDifficulty);
 
-for (let i = 0; i < gridArray.length; i++) {
+    // In base al valore definisco il numero di celle
+    if (userDifficulty == "easy") {
+        gridSize = 100;
+    } else if (userDifficulty == "medium") {
+        gridSize = 81;
+    } else {
+        gridSize = 49;
+    }
 
-    const gridNumber = gridArray[i];
-
-    const domElement = generateGridItem(gridNumber)
-
-    // aggiungo all'elmento appena creato la gestione del click
-    domElement.addEventListener("click", function() {
-        this.classList.add("active");
-    });
-
-    // appendo questo elemnto al contenitore
-    gridContainer.append(domElement);
-
-}
-
+    // Creo la griglia
+    const gridArray = generateGridNumbers(gridSize);
+    console.log(gridArray);
+    
+    
+    // 2. Per ogni numero creo un grid item
+    const gridContainer = document.querySelector(".grid-container");
+    gridContainer.innerHTML = "";
+    
+    for (let i = 0; i < gridArray.length; i++) {
+    
+        const gridNumber = gridArray[i];
+    
+        const domElement = generateGridItem(gridNumber)
+    
+        // aggiungo all'elmento appena creato la gestione del click
+        domElement.addEventListener("click", function() {
+            this.classList.add("active");
+        });
+    
+        // appendo questo elemnto al contenitore
+        gridContainer.append(domElement);
+    
+    }
+});
 
 
 
@@ -58,11 +74,20 @@ function generateGridNumbers(gridSize) {
     // creo un elemnto html
     const newElement = document.createElement("div");
 
-    // agiungo il span con il numero
+    // aggiungo lo span con il numero
     newElement.innerHTML = `<span>${number}</span>`
 
-    // assegno la classe grid-item
-    newElement.classList.add("grid-item");
+    // assegno la classe grid-item in base al livello di difficoltà
+    const userDifficulty = document.getElementById("user-difficulty").value;
+    if (userDifficulty == "easy") {
+        newElement.classList.add("grid-item");
+    }
+     else if (userDifficulty == "medium") {
+        newElement.classList.add("grid-item-2");
+    }
+     else {
+        newElement.classList.add("grid-item-3");
+    }
 
     // ritorno elemnto
     return newElement;
